@@ -1,0 +1,43 @@
+
+
+# Purpose
+
+This program is the Project1 MetroSim Phase 1.
+
+it contains 2 class : Passenger and PassengerQueue 
+
+
+
+# Acknowledgements
+
+the PassengerQueue is implemented by C++ STL < list >.
+
+# FILES
+
+Passenger.h  : the head file that defines the *Passenger* 's  basic structure.
+
+Passenger.cpp  : implementations of  *Passenger*
+
+PassengerQueue.h  : the head file that defines the *PassengerQueue*  class.
+
+PassengerQueue.cpp  : implementations of  *PassengerQueue* 's interfaces based on C++ < list >
+
+unit_tests.h : the unit test functions of  *Passenger* and *PassengerQueue*  it should be included in unit_test_driver.cpp.
+
+unit_test_driver.cpp: a simple driver that calls all the unit_test functions in "unit_tests.h".
+
+Makefile  :Used to make compilation and unit testing, creates an  execution of unit test called "unit_test".
+
+
+
+# COMPILE &RUN
+
+type "make" to use the makefile to build the project  and then run unit_test
+# Test
+
+The test code is in the unit_tests.h 
+
+First I test the print() of Passenger to see if it works.
+
+then I test  each of the functions implemented in *Passenger* and *PassengerQueue* in my own unit_test_driver, taking into account some edge cases. For example, call deque() or front()  from an empty list(this will throw an exception ) 
+

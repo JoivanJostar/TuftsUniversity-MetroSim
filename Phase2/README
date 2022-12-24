@@ -1,0 +1,89 @@
+/**********************************************************
+* Project 1: Metro Simulator
+* CS 15
+* README
+*
+*********************************************************/
+
+Compile/run:
+     - Compile using
+            make MetroSim
+     - run executable with
+            ./MetroSim stationsFile passFile [commands]
+
+
+Program Purpose:
+
+This program simulates a running train to accommodate passengers arriving/departing a metro. 
+
+Acknowledgements: 
+the PassengerQueue is implemented by C++ STL < list >.
+
+the train  and station passenger Queues in MetroSim simulator is implemented by C++ STL < vector >
+
+the mapping relationships of station id and station name is implemented by C++ STL  < map >
+
+see: [cppreference.com]
+
+Files: 
+
+Passenger.h  : the head file that defines the *Passenger* 's  basic structure.
+
+Passenger.cpp  : implementations of  *Passenger*
+
+PassengerQueue.h  : the head file that defines the *PassengerQueue*  class.
+
+PassengerQueue.cpp  : implementations of  *PassengerQueue* 's interfaces based on C++ < list >
+
+MetroSim.h: the class definition of *MetroSim* simulator.
+
+MetroSim.cpp: the implemations of class *MetroSim* 
+
+main.cpp: the main module. Parsing the cmd line arguments and create simulator.
+
+unit_tests.h : the unit test functions of  *Passenger* and *PassengerQueue*  
+
+
+Makefile  :Used to make compilation
+
+
+stations.txt: a test file. Some stations names are in this file.
+
+test_commands.txt : some test commands.
+
+Data Structures:
+I use a queue data structure (base on a C++ STL list) to implement the PassengerQueue, whose template argument is Passenger type. Queue is a first in, first out data structure (FIFO). It can well reflect the queue of passengers and the  destination queue.
+The MetroSim mainly has 3 member variables:
+
+vector<PassengerQueue> train; 
+
+vector<PassengerQueue> stations; 
+
+map<int ,std::string> stationMap; 
+
+
+By operating on these three members, we can complete this program.
+I use a vector (C++ STL vector) to implement the train. Each element of the vector is a PassengerQueue.The destination of the passenger corresponds to the subscript of the vector one by one. For example ,train[3] is a PassengerQueue whose passengers' destination is Station_3.
+Also the PassengerQueue in each staion is a vector. For example, stations[3] is a PassengerQueue, whose passenger is waiting at the station_3. 
+Once the train arrive at the station_3, we can clear the PassengerQueue train[3]. And then deque() all of the  elements of  PassengerQueue stations[3], for each element finding its corresponding train queue.
+I use a Map data structure to store the mapping relationship between  station_ID and Station_name, 
+for example <0,Heath St>  <1 ,Back of the Hill> .  Each element of the map is a key-value pair. The map data structure of C++ is a Tree structure. we can also use a vector to store the relationship, where the key is the vector's subscript, the value is the station name.
+The train runs in circulation but I have not use a circular data structure .
+This can be easily implemented by using MOD operation. For example , there are 26 stations, (the station number begins at 0) , the train now is stopping at station_X. So the next station is ( station_X +1)%26.
+The result must between 0 and 25, and increase in circulation.
+
+Testing:
+
+In phase1 we have tested the Passenger and PassengerQueue .
+Here we continue to test the MetroSim.
+First I tested all the interfaces defined in MetroSim.h .
+I use the given stations file to create a MetroSim Object to see if it is created sucessfully.
+then pass some commands to it, for example "p 1 2" "m m" .... and then call the function printStateInfo() 
+to check if the data was put into the simulator successfully.
+Then I have tried some edge tests. 
+Passing wrong commands to simulator, it will print some error infomation. 
+Passing a negative station number when use "p from to" , it also prints some error infomation.
+Using  "m m"  command for many times to see if the train runs in circulation
+Passing wrong command line arguments when boot the program to test if it could print some error information.
+Passing files that could not be open to test if it could print some error information.
+Making my own test_command files  to test the program , and open the output log file after the program exited, to check that if the program output as expected.
